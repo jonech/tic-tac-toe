@@ -18,7 +18,14 @@ $gcc -Wall -o tictactoe tictactoe.c
 $./tictactoe
 ```
 
-<h3>Play Example</h3>
+<h3>Instructions</h3>
+ 1. Enter the size of the board.			
+ 2. Enter the position that you wish to place[(row) (column)].
+ 3. Switch player.
+ 4. Repeat step 2 - 3.
+ 5. Win/Draw
+
+<h3>Example</h3>
 ```
 Please select the size of board: 3
 0 0 0
