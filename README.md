@@ -28,16 +28,19 @@ $./tictactoe
 <h3>Example</h3>
 ```
 Please select the size of board: 3
-0 0 0
-0 0 0
-0 0 0
+
+- - -
+- - -
+- - -
 Player 1's turn, please enter a position [row(0-2) col(0-2)]: 1 2
-0 0 0
-0 0 1
-0 0 0
+
+- - -
+- - O
+- - -
 Player 2's turn, please enter a position [row(0-2) col(0-2)]: 0 0
-2 0 0
-0 0 1
-0 0 0
+
+X - - 
+- - O
+- - -
 Player 1's turn, please enter a position [row(0-2) col(0-2)]:
 ```
