@@ -252,9 +252,21 @@ printBoard(int **board, int board_size)
 {
 	int i, j;
 
+	char player1 = 'O';
+	char player2 = 'X';
+	char empty = '-';
+
+	printf("\n");
+	
 	for (i=0; i<board_size; i++) {
 		for (j=0; j<board_size; j++) {
-			printf("%d ", board[i][j]);
+
+			if (board[i][j] == PLAYER1)
+				printf("%c ", player1);
+			else if (board[i][j] == PLAYER2)
+				printf("%c ", player2);
+			else if (board[i][j] == EMPTY)
+				printf("%c ", empty);
 		}
 
 		printf("\n");
