@@ -4,8 +4,7 @@
  *		Email: jone@live.hk
  *		Description: 
  *		- tic-tac-toe for 2 players.
- *		- Win by capturing the whole row, or the whole column.
- *		- Doesn't work diagonally.
+ *		- Win by capturing the whole row, column or diagonal.
  *
  *		Instructions:
  *		1 - Enter the size of the board(nxn).			
@@ -39,7 +38,9 @@ int checkHorizontal(int **board, int player, int row, int board_size);
 int checkVertical(int **board, int player, int col, int board_size);
 int checkPlayerInput(int **board, int player, position_t post, int board_size);
 position_t takePlayerInput(int **board, int player, int board_size);
-
+int checkDiagonal(int **board, int player, int row, int col, int board_size);
+int checkDescending(int **board, int player, int board_size);
+int checkAscending(int **board, int player, int board_size);
 
 
 int
@@ -105,7 +106,8 @@ playGame(int **board, int board_size)
 
 		// check if input is winning move, escape play loop if it is, or else switch player.
 		if (checkHorizontal(board, current_player, input.row, board_size) == 1 ||
-			checkVertical(board, current_player, input.col, board_size) == 1) {
+			checkVertical(board, current_player, input.col, board_size) == 1 ||
+			checkDiagonal(board, current_player, input.row, input.col, board_size) == 1) {
 
 			printf("~~~~Player %d wins!~~~~\n", current_player);
 			winner = 1; 
@@ -240,6 +242,89 @@ checkVertical(int **board, int player, int col, int board_size)
 		return 1;
 	}
 
+	return 0;
+}
+
+
+/*
+*  Does diagonal checking. 3 cases:
+*  - the position is in the middle of the board
+*  - the position lies in the descending diagonal line (from left to right)
+*  - the position lies in the ascending diagonal line (from left to right)
+*/
+int 
+checkDiagonal(int **board, int player, int row, int col, int board_size) 
+{
+
+	// middle position, need to check ascending and descending
+	// the row is always equal to column
+	// also row + column is equal to boardsize - 1
+	if (row == col && row+col == board_size-1) {
+		if (checkAscending(board, player, board_size) && checkDescending(board, player, board_size)) 
+			return 1;
+	}
+
+	// descending diagonal line
+	// the row is always equal to column in descending diagonal line
+	// but row + column is not equal to boardsize - 1
+	else if (row == col && row+col != board_size-1) {
+		if (checkDescending(board, player, board_size))
+			return 1;
+	}
+
+	// ascending diagonal line
+	// the row is not equal to column in ascending diagonal line
+	// but row + column is always equal to boardsize - 1
+	else if (row != col && row+col == board_size-1) {
+		if (checkAscending(board, player, board_size))
+			return 1;
+	}
+
+	return 0;
+}
+
+
+// Check descending diagonal line if player capture the whole line
+int 
+checkDescending(int **board, int player, int board_size) 
+{
+	int total = 0;
+	int n = 0;
+
+	// the row is always equal to column in descending diagonal line
+	// so increment both row and column together, starting from top left
+	while (n < board_size && player == board[n][n]) {
+		total += 1;
+		n += 1;
+	}
+	// total equal to size of board determines winner
+	if (total == board_size)
+		return 1;
+	
+	return 0;
+}
+
+
+// Check ascending diagonal line 
+int 
+checkAscending(int **board, int player, int board_size) 
+{
+	int total = 0;
+
+	// row+column will always equal to boardsize-1
+	// so start from bottom left corner of board
+	// then decrement row and increment column for checking
+	int i = board_size-1;
+	int j = 0;
+	while (i >= 0 && j < board_size && player == board[i][j]) {
+		total += 1;
+		i -= 1;
+		j += 1;
+	}
+	// total equal to size of board determines winner
+	if (total == board_size)
+		return 1;
+	
 	return 0;
 }
 
