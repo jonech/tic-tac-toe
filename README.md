@@ -1,7 +1,6 @@
 <h1>About</h1>
 * tic-tac-toe for 2 players.
-* Win by capturing the whole row, or the whole column.
-* Doesn't work diagonally (yet).
+* Win by capturing the whole row, column or diagonal.
 
 
 <h3>Require:</h3>
