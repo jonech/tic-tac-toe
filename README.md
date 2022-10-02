@@ -1,30 +1,30 @@
-<h1>About</h1>
+*About*
 * tic-tac-toe for 2 players.
 * Win by capturing the whole row, column or diagonal.
 
 
-<h3>Require:</h3>
+*Require:*
 * gcc (tested on version 5.2.1)
 
 
-<h3>Compile</h3>
-````
+*Compile*
+```
 $gcc -Wall -o tictactoe tictactoe.c
 ```
 
-<h3>Run</h3>
+*Run*
 ```
 $./tictactoe
 ```
 
-<h3>Instructions</h3>
+*Instructions*
  1. Enter the size of the board.			
  2. Enter the position that you wish to place[(row) (column)].
  3. Switch player.
  4. Repeat step 2 - 3.
  5. Win/Draw
 
-<h3>Example</h3>
+*Example*
 ```
 Please select the size of board: 3
 
